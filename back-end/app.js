@@ -3,12 +3,12 @@ require('./config/database').connect()
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const express = require('express')
+const cors = require('cors')
 
 const app = express()
 
 app.use(express.json())
-
-// Logic goes here
+app.use(cors())
 
 // importing user context
 const User = require('./model/user')
@@ -18,10 +18,10 @@ app.post('/register', async (req, res) => {
 	// Our register logic starts here
 	try {
 		// Get user input
-		const { first_name, last_name, email, password } = req.body
+		const { firstName, lastName, email, password } = req.body
 
 		// Validate user input
-		if (!(email && password && first_name && last_name)) {
+		if (!(email && password && firstName && lastName)) {
 			res.status(400).send('All input is required')
 		}
 
@@ -38,8 +38,8 @@ app.post('/register', async (req, res) => {
 
 		// Create user in our database
 		const user = await User.create({
-			first_name,
-			last_name,
+			firstName,
+			lastName,
 			email: email.toLowerCase(), // sanitize: convert email to lowercase
 			password: encryptedPassword,
 		})
@@ -49,7 +49,7 @@ app.post('/register', async (req, res) => {
 			{ user_id: user._id, email },
 			process.env.TOKEN_KEY,
 			{
-				expiresIn: '2h',
+				expiresIn: '1h',
 			}
 		)
 		// save user token
