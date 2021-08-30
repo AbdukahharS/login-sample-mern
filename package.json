@@ -4,8 +4,11 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"server": "node ./back-end/index.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"start": "node back-end/server.js",
+		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build"
+	},
+	"engines": {
+		"node": "14.17.1"
 	},
 	"repository": {
 		"type": "git",
