@@ -1,0 +1,21 @@
+{
+	"name": "login-sample-mern",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"server": "node ./back-end/index.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/KahhorovSh04/login-sample-mern.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/KahhorovSh04/login-sample-mern/issues"
+	},
+	"homepage": "https://github.com/KahhorovSh04/login-sample-mern#readme"
+}

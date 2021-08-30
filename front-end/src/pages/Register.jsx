@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 
-const Register = ({ validator }) => {
+const Register = ({ validator, setToken, history }) => {
 	const fNameRef = useRef()
 	const lNameRef = useRef()
 	const emailRef = useRef()
@@ -35,6 +35,10 @@ const Register = ({ validator }) => {
 		})
 		const data = await res.json()
 		console.log(data)
+		if (data) {
+			setToken(data.token)
+			history.push('/')
+		}
 	}
 
 	return (

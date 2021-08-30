@@ -22,7 +22,7 @@ app.post('/register', async (req, res) => {
 
 		// Validate user input
 		if (!(email && password && firstName && lastName)) {
-			res.status(400).send('All input is required')
+			res.status(400).send({ message: 'All input is required' })
 		}
 
 		// check if user already exist
@@ -30,7 +30,9 @@ app.post('/register', async (req, res) => {
 		const oldUser = await User.findOne({ email })
 
 		if (oldUser) {
-			return res.status(409).send('User Already Exist. Please Login')
+			return res
+				.status(409)
+				.send({ message: 'User Already Exist. Please Login' })
 		}
 
 		//Encrypt user password
@@ -71,7 +73,7 @@ app.post('/login', async (req, res) => {
 
 		// Validate user input
 		if (!(email && password)) {
-			res.status(400).send('All input is required')
+			res.status(400).send({ message: 'All input is required' })
 		}
 		// Validate if user exist in our database
 		const user = await User.findOne({ email })
@@ -82,7 +84,7 @@ app.post('/login', async (req, res) => {
 				{ user_id: user._id, email },
 				process.env.TOKEN_KEY,
 				{
-					expiresIn: '2h',
+					expiresIn: '1h',
 				}
 			)
 
@@ -91,8 +93,9 @@ app.post('/login', async (req, res) => {
 
 			// user
 			res.status(200).json(user)
+			return
 		}
-		res.status(400).send('Invalid Credentials')
+		res.status(400).send({ message: 'Invalid Credentials' })
 	} catch (err) {
 		console.log(err)
 	}
@@ -102,7 +105,7 @@ app.post('/login', async (req, res) => {
 const auth = require('./middleware/auth')
 
 app.post('/welcome', auth, (req, res) => {
-	res.status(200).send('Welcome 🙌 ')
+	res.status(200).send({ message: 'valid' })
 })
 
 module.exports = app
