@@ -24,7 +24,7 @@ function App() {
 		const res = await fetch('http://localhost:4000/welcome', {
 			method: 'POST',
 			headers: {
-				'x-access-token': token,
+				'x-access-token': localStorage.getItem('token'),
 			},
 		})
 		const data = await res.json()

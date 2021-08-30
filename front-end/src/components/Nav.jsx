@@ -5,7 +5,7 @@ const Nav = ({ token }) => {
 	return (
 		<nav>
 			<h1 id='logo'>
-				<Link to='/'>LogName</Link>
+				<Link to='/'>LogoName</Link>
 			</h1>
 			{!token && (
 				<div className='nav-links'>
